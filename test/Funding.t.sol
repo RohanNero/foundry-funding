@@ -21,8 +21,8 @@ contract FundingTest is Test {
         assertEq(777,funding.viewGoal());
     }
 
-    // function testConsoleLog() public view {
-    //     console.log('test address:',address(this));
-    // }
+    function testConsoleLog() public view {
+        console.log('test address:',address(this));
+    }
 
 }
