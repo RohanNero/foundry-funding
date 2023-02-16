@@ -18,12 +18,14 @@ contract FundingFactoryTest is Test {
     }
 
     function testEmitCreateFundingContract(uint goal) public {
+        goal = bound(goal, 1e9,2**256-1);
         vm.expectEmit(false,true,false,false, address(fundingFactory));
-        emit SimpleFundingContractCreated(address(777), goal);
+        emit SimpleFundingContractCreated(address(1337), goal);
         fundingFactory.createSimpleFundingContract(goal);
     }
  
     function testReturnNewAddress(uint goal) public {
+        goal = bound(goal,1e9,2**256-1);
         address newAddr = fundingFactory.createSimpleFundingContract(goal);
         //console.log("newAddr: ",newAddr);
         funding = SimpleFunding(newAddr);

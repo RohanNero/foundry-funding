@@ -7,11 +7,13 @@ import "../src/SimpleFunding.sol";
 //error SimpleFunding__MustSendAtleastOneGwei(uint valueSent, uint oneGwei);
 
 contract SimpleFundingTest is Test {
+    uint testGoal = 1e10 + 777;
     SimpleFunding public funding;
+    event DonationReceived(uint indexed amountDonated, uint indexed _totalDonated, uint indexed _goal);
 
     function setUp() public {
         vm.prank(address(0), address(1337));
-        funding = new SimpleFunding(777);
+        funding = new SimpleFunding(testGoal);
         //console.log('test deployer:', msg.sender);
     }
 
@@ -20,9 +22,20 @@ contract SimpleFundingTest is Test {
         assertEq(funding.owner(),address(1337));
     }
 
-    function testExpectDonateRevert() public payable {
-        vm.expectRevert(abi.encodeWithSelector(SimpleFunding__MustSendAtleastOneGwei.selector,msg.value,1e9));
+    function testDonateRevert() public payable {
+        vm.expectRevert(abi.encodeWithSelector(SimpleFunding__AtleastOneGwei.selector,msg.value,1e9));
         funding.donate();
+    }
+
+    function testDonate() public payable {
+        funding.donate{value: 1e10}();
+        assertEq(1e10, funding.viewTotalDonated());
+    }
+
+    function testDonateEvent() public payable {
+        vm.expectEmit(true,true,true,false,address(funding));
+        emit DonationReceived(1e10,1e10,testGoal);
+        funding.donate{value: 1e10}();
     }
 
 
@@ -31,11 +44,11 @@ contract SimpleFundingTest is Test {
     /// 'bonus' tests
 
     function testGoalValue() public {
-        assertEq(777,funding.viewGoal());
+        assertEq(testGoal,funding.viewGoal());
     }
 
-    function testConsoleLog() public view {
-        console.log('test address:',address(this));
-    }
+    // function testConsoleLog() public view {
+    //     //console.log('test address:',address(this));
+    // }
 
 }

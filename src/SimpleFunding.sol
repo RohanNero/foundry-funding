@@ -3,7 +3,7 @@ pragma solidity ^0.8.13;
 
 import 'openzeppelin/contracts/access/Ownable.sol';
 
-error SimpleFunding__MustSendAtleastOneGwei(uint valueSent, uint oneGwei);
+error SimpleFunding__AtleastOneGwei(uint valueSent, uint oneGwei);
 
 /**
 * @title Funding
@@ -13,7 +13,9 @@ error SimpleFunding__MustSendAtleastOneGwei(uint valueSent, uint oneGwei);
 contract SimpleFunding is Ownable{
 
     uint256 private _goal;
-    uint256 private totalDonated;
+    uint256 private _totalDonated;
+
+    event DonationReceived(uint indexed amountDonated, uint indexed _totalDonated, uint indexed _goal);
     
 
     
@@ -22,15 +24,19 @@ contract SimpleFunding is Ownable{
     * @param goal amount you wish to raise in wei */
     constructor(uint256 goal) {
         _transferOwnership(tx.origin);
+        if(goal < 1e9) {
+            revert SimpleFunding__AtleastOneGwei(goal, 1e9);
+        }
         _goal = goal;
     }
 
-    
+
     function donate() public payable{
         if (msg.value < 1e9) {
-            revert SimpleFunding__MustSendAtleastOneGwei(msg.value, 1e9);
+            revert SimpleFunding__AtleastOneGwei(msg.value, 1e9);
         }
-        totalDonated += msg.value;
+        _totalDonated += msg.value;
+        emit DonationReceived(msg.value, _totalDonated, _goal);
     }
 
 
@@ -47,6 +53,11 @@ contract SimpleFunding is Ownable{
     /**@notice this function returns the contract's balance */
     function viewBal() public view returns(uint256) {
         return address(this).balance;
+    }
+
+    /**@notice this function returns the totalDonated variable */
+    function viewTotalDonated() public view returns(uint256) {
+        return _totalDonated;
     }
 
     // left off right here, just fleshing out the Funding contract with more logic. 
