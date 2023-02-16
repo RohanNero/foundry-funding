@@ -2,19 +2,20 @@
 pragma solidity ^0.8.13;
 
 import "forge-std/Test.sol";
-import "../src/Funding.sol";
+import "../src/SimpleFunding.sol";
 
-contract FundingTest is Test {
-    Funding public funding;
+contract SimpleFundingTest is Test {
+    SimpleFunding public funding;
 
     function setUp() public {
-        //vm.prank()
-       funding = new Funding(777);
+        vm.prank(address(0), address(1337));
+       funding = new SimpleFunding(777);
        //console.log('test deployer:', msg.sender);
     }
 
     function testSettingOwner() public {
-        assertEq(funding.owner(),address(this));
+        console.log("leet:",address(1337));
+        assertEq(funding.owner(),address(1337));
     }
 
     function testGoalValue() public {

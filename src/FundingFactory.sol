@@ -2,7 +2,7 @@
 
 pragma solidity ^0.8.13;
 
-import '../src/Funding.sol';
+import '../src/SimpleFunding.sol';
 
 /**
 * @title FundingFactory
@@ -11,18 +11,18 @@ import '../src/Funding.sol';
  */
 contract FundingFactory {
 
-    Funding private funding;
+    SimpleFunding private funding;
 
-    event FundingContractCreated(address indexed newContract, uint indexed goal);
+    event SimpleFundingContractCreated(address indexed newContract, uint indexed goal);
 
     /**
     * @notice this function creates Funding contracts
     * @dev createFundingContract() returns the newly created contract address and emits event with the address
     * @param _fundingGoal this sets the 'goal' variable inside Funding
      */
-    function createFundingContract(uint _fundingGoal) public returns(address newAddr) {
-        funding = new Funding(_fundingGoal);
-        emit FundingContractCreated(address(funding), _fundingGoal);
+    function createSimpleFundingContract(uint _fundingGoal) public returns(address newAddr) {
+        funding = new SimpleFunding(_fundingGoal);
+        emit SimpleFundingContractCreated(address(funding), _fundingGoal);
         return address(funding);
     }
  

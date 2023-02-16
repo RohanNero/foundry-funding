@@ -8,9 +8,9 @@ import '../src/FundingFactory.sol';
 contract FundingFactoryTest is Test {
 
     FundingFactory public fundingFactory;
-    Funding public funding;
+    SimpleFunding public funding;
 
-    event FundingContractCreated(address indexed newContract, uint indexed goal);
+    event SimpleFundingContractCreated(address indexed newContract, uint indexed goal);
 
 
     function setUp() public {
@@ -19,14 +19,14 @@ contract FundingFactoryTest is Test {
 
     function testEmitCreateFundingContract(uint goal) public {
         vm.expectEmit(false,true,false,false, address(fundingFactory));
-        emit FundingContractCreated(address(777), goal);
-        fundingFactory.createFundingContract(goal);
+        emit SimpleFundingContractCreated(address(777), goal);
+        fundingFactory.createSimpleFundingContract(goal);
     }
  
     function testReturnNewAddress(uint goal) public {
-        address newAddr = fundingFactory.createFundingContract(goal);
+        address newAddr = fundingFactory.createSimpleFundingContract(goal);
         //console.log("newAddr: ",newAddr);
-        funding = Funding(newAddr);
+        funding = SimpleFunding(newAddr);
         uint viewedGoal = funding.viewGoal();
         //console.log("goal: ", viewedGoal);
         assertEq(goal,viewedGoal);
