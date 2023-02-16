@@ -4,8 +4,8 @@ pragma solidity ^0.8.13;
 import 'openzeppelin/contracts/access/Ownable.sol';
 
 /**
-* @author Rohan Nero
 * @title Funding
+* @author Rohan Nero
 * @notice a foundry-built trustless crowdraiser
  */
 contract Funding is Ownable{
