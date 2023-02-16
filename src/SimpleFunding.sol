@@ -31,6 +31,8 @@ contract SimpleFunding is Ownable{
     }
 
 
+    /**
+    * @notice this function keeps track of ether sent to contract */
     function donate() public payable{
         if (msg.value < 1e9) {
             revert SimpleFunding__AtleastOneGwei(msg.value, 1e9);
