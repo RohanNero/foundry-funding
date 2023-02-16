@@ -25,12 +25,14 @@ contract SimpleFunding is Ownable{
         _goal = goal;
     }
 
+    
     function donate() public payable{
         if (msg.value < 1e9) {
             revert SimpleFunding__MustSendAtleastOneGwei(msg.value, 1e9);
         }
         totalDonated += msg.value;
     }
+
 
 
 
