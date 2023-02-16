@@ -15,4 +15,6 @@ contract FundingFactory {
         emit FundingContractCreated(address(funding), _fundingGoal);
         return address(funding);
     }
+
+    
 }
