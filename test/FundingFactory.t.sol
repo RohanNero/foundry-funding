@@ -17,14 +17,19 @@ contract FundingFactoryTest is Test {
         fundingFactory = new FundingFactory();
     }
 
-    function testEmitCreateFundingContract(uint goal) public {
+    function testRevert_CreateFundingContract() public {
+        vm.expectRevert(abi.encodeWithSelector(SimpleFunding__AtleastOneGwei.selector,777,1e9));
+        fundingFactory.createSimpleFundingContract(777);
+    }
+
+    function testEmit_CreateFundingContract(uint goal) public {
         goal = bound(goal, 1e9,2**256-1);
         vm.expectEmit(false,true,false,false, address(fundingFactory));
         emit SimpleFundingContractCreated(address(1337), goal);
         fundingFactory.createSimpleFundingContract(goal);
     }
  
-    function testReturnNewAddress(uint goal) public {
+    function testReturn_CreateFundingContract(uint goal) public {
         goal = bound(goal,1e9,2**256-1);
         address newAddr = fundingFactory.createSimpleFundingContract(goal);
         //console.log("newAddr: ",newAddr);

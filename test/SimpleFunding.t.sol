@@ -17,22 +17,27 @@ contract SimpleFundingTest is Test {
         //console.log('test deployer:', msg.sender);
     }
 
-    function testSettingOwner() public {
+    function testRevert_constructor() public {
+        vm.expectRevert(abi.encodeWithSelector(SimpleFunding__AtleastOneGwei.selector,777,1e9));
+        funding = new SimpleFunding(777);
+    }
+
+    function testAssert_constructor() public {
         //console.log("leet:",address(1337));
         assertEq(funding.owner(),address(1337));
     }
 
-    function testDonateRevert() public payable {
+    function testRevert_donate() public payable {
         vm.expectRevert(abi.encodeWithSelector(SimpleFunding__AtleastOneGwei.selector,msg.value,1e9));
         funding.donate();
     }
 
-    function testDonate() public payable {
+    function testAssert_donate() public payable {
         funding.donate{value: 1e10}();
         assertEq(1e10, funding.viewTotalDonated());
     }
 
-    function testDonateEvent() public payable {
+    function testEmit_donate() public payable {
         vm.expectEmit(true,true,true,false,address(funding));
         emit DonationReceived(1e10,1e10,testGoal);
         funding.donate{value: 1e10}();

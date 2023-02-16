@@ -41,10 +41,6 @@ contract SimpleFunding is Ownable{
         emit DonationReceived(msg.value, _totalDonated, _goal);
     }
 
-
-
-
-
     /// View/Pure functions
 
     /**@notice this function returns _goal */
