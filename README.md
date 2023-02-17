@@ -8,7 +8,7 @@ You may be thinking to yourself
 
 > _why in sweet davey jones locker would you want to set the `goal` to be in terms of ETH instead of a less volatile currency‽_
 
-I'm aware it is a rather flawed design choice currently, but this project was made for **fun** and to **get acquainted with foundry**. If you want to build upon this project you probably would want to implement a less volatile currency or at the very least use a pricefeed.
+I'm aware it is a rather flawed design choice currently, but this project was made for **fun** and to **get acquainted with foundry**. If you want to build upon this project you probably would want to implement a stablecoin or at the very least use a pricefeed.
 
 ---
 
