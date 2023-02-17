@@ -18,7 +18,7 @@ Quick naming convention for organizational purposes, this would turn into chaos 
 
 - **Assert**
 
-  - test calls a variation of the assert cheatcode and checks the value of a variable after a state change.
+  - test calls a variation of the `assert` cheatcode and checks the value of a variable after a state change.
   - click this [link for list of assertions](https://book.getfoundry.sh/reference/ds-test#asserting).
 
 - **Emit**
