@@ -13,3 +13,16 @@ Quick naming convention for organizational purposes, this would turn into chaos 
 - **Emit** - used for ensuring events were emitted correctly. (`expectEmit` cheatcode)
 
 - **Revert** - used for ensuring tests failed / were reverted; they may include custom errors (`expectRevert` cheatcode)
+
+Example tests:
+
+```js
+function testAssert_constructor() public {
+    assertEq(funding.owner(),address(1337));
+}
+
+function testRevert_donate() public payable {
+    vm.expectRevert(abi.encodeWithSelector(SimpleFunding__AtleastOneGwei.selector,msg.value,1e9));
+    funding.donate();
+}
+```
