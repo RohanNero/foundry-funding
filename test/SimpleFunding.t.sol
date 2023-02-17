@@ -48,7 +48,7 @@ contract SimpleFundingTest is Test {
 
     /// 'bonus' tests
 
-    function testGoalValue() public {
+    function testAssert_GoalValue() public {
         assertEq(testGoal,funding.viewGoal());
     }
 

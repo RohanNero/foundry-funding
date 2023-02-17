@@ -58,8 +58,5 @@ contract SimpleFunding is Ownable{
         return _totalDonated;
     }
 
-    // left off right here, just fleshing out the Funding contract with more logic. 
-    // At the same time I write tests for it inside the Funding.t.sol file.
-    // Need to remember to constantly push my changes to the github repo.
     
 }
