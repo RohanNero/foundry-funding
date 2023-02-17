@@ -1,6 +1,6 @@
 # Foundry-funding
 
-a simple crowd funding dApp built with 100% solidity thanks to [foundry](https://book.getfoundry.sh/) :)
+a simple crowd funding dApp built with 100% solidity thanks to [foundry](https://book.getfoundry.sh/)
 
 To create your own crowd funding smart contract all you need to do is call the `createSimpleFundingContract()` function on the **FundingFactory** contract. In addition to returning it directly, a `SimpleFundingContractCreated` event with the newly created contract's address is emitted by calling this function. The Only parameter you need to pass to the function is `goal`, the amount you want to raise/get funded in [wei](https://docs.soliditylang.org/en/v0.8.18/introduction-to-smart-contracts.html#accounts).
 
