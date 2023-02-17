@@ -12,7 +12,9 @@ import '../src/SimpleFunding.sol';
 contract FundingFactory {
 
     SimpleFunding private funding;
-
+    
+    /**@param newContract the address of your new `SimpleFunding` contract that was created
+    * @param goal the amount you want to raise in WEI */
     event SimpleFundingContractCreated(address indexed newContract, uint indexed goal);
 
     /**
