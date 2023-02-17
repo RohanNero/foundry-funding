@@ -16,11 +16,19 @@ I'm aware it is a rather terrible design choice currently, but this project was 
 
 Quick naming convention for organizational purposes, this would turn into chaos if used in anything more than a very basic contract.
 
-- **Assert** - test calls a variation of the assert cheatcode and checks the value of a variable after a state change
+- **Assert**
 
-- **Emit** - used for ensuring events were emitted correctly. (`expectEmit` cheatcode)
+  - test calls a variation of the assert cheatcode and checks the value of a variable after a state change.
+  - click this [link for list of assertions](https://book.getfoundry.sh/reference/ds-test#asserting).
 
-- **Revert** - used for ensuring tests failed / were reverted; they may include custom errors (`expectRevert` cheatcode)
+- **Emit**
+
+  - used for ensuring events were emitted correctly.
+  - `expectEmit` cheatcode
+
+- **Revert**
+  - used for ensuring tests failed / were reverted; they may include custom errors
+  - `expectRevert` cheatcode
 
 Example tests:
 
